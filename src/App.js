@@ -1,26 +1,35 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { useQuery } from 'urql';
+import { observer } from "mobx-react";
 
-function App() {
+const getTodos = `
+{
+  characters (page:1, filter: {species:"Human"}){
+   results {
+     id, name, type, origin {dimension}
+   }
+ }
+ }
+`;
+
+const App = ({ limit = 10 }) => {
+  const [result] = useQuery({
+    query: getTodos,
+    variables: { limit },
+  });
+
+  if (result.fetching) return 'Loading...';
+  if (result.error) return 'Oh no!';
+
+
+  const Name = observer(({dude}) => <span>{dude.name}</span>)
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <ul>
+      {result.data.characters.results.map((dude) => (
+        <li key={dude.id}><Name dude={dude} /> {dude.origin.dimension}</li>
+      ))}
+    </ul>
   );
-}
+};
 
-export default App;
+export default App

@@ -1,3 +1,7 @@
+# MobX Urql Cache Demo
+
+You will need to clone this: https://github.com/stutrek/urql-exchange-graphcache and yarn link it.
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
