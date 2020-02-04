@@ -23,10 +23,11 @@ const App = ({ limit = 10 }) => {
 
 
   const Name = observer(({dude}) => <span>{dude.name}</span>)
+  const Dimension = observer(({origin}) => <span>{origin.dimension}</span>)
   return (
     <ul>
       {result.data.characters.results.map((dude) => (
-        <li key={dude.id}><Name dude={dude} /> {dude.origin.dimension}</li>
+        <li key={dude.id}><Name dude={dude} /> <Dimension origin={dude.origin} /></li>
       ))}
     </ul>
   );

@@ -2,6 +2,14 @@
 
 You will need to clone this: https://github.com/stutrek/urql-exchange-graphcache and yarn link it.
 
+Put this stuff in the console...
+```
+currentData.records.base.get('Character:1').name = 'Bob'
+
+currentData.records.base.get('Character:1.origin').dimension = 'asfd'
+```
+
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
